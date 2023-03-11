@@ -39,7 +39,10 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "ssl",
+    "ssl-pinning",
+    "network"
   ],
   "repository": "https://github.com/frw/react-native-ssl-public-key-pinning",
   "author": "Frederick Widjaja <widjaja.frederick@gmail.com> (https://github.com/frw)",
