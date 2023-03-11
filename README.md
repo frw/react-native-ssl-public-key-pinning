@@ -1,28 +1,102 @@
-# react-native-ssl-public-key-pinning
+<h1 align="center">react-native-ssl-public-key-pinning</h1>
 
-Simple and secure SSL pinning validation for React Native
+Simple and secure SSL public key pinning validation for React Native. Uses [OkHttp CertificatePinner](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-certificate-pinner/) on Android and [TrustKit](https://github.com/datatheorem/TrustKit) on iOS.
 
-## Installation
+## 🔍Overview
 
+- ✅ Supports SSL public key pinning using the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info.
+- ✅ **No native configuration needed.** Simply install and configure through the provided JS API.
+- ✅ **No need to modify existing network request code.** All network requests in your application will have the certificate pinning configuration automatically enabled after initialization. 
+
+## 🧰Installation
+
+### React Native
 ```sh
 npm install react-native-ssl-public-key-pinning
+npx pod-install
 ```
 
-## Usage
+### Expo
+```sh
+expo install react-native-ssl-public-key-pinning
+```
+
+## 🚀Usage
+
+1. Retrieve the base64-encoded SHA-256 public key hash of the certificates you want to pin. [More details on how to do this](#public-key-hash)
+2. Call `initializeSslPinning` as early as possible in your App entrypoint with your SSL pinning configuration.
+3. All network requests in your app should now have the pinning configuration enabled.
+
+### Example
 
 ```js
-import { multiply } from 'react-native-ssl-public-key-pinning';
+import { initializeSslPinning } from 'react-native-ssl-public-key-pinning';
+
+initializeSslPinning({
+  'google.com': {
+    includeSubdomains: true,
+    publicKeyHashes: [
+      'CLOmM1/OXvSPjw5UOYbAf9GKOxImEp9hhku9W90fHMk=',
+      'hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=',
+      'Vfd95BwDeSQo+NUYxVEEIlvkOlWY2SalKK1lPhzOx78=',
+      'QXnt2YHvdHR3tJYmQIr0Paosp6t/nggsEGD4QJZ3Q0g=',
+      'mEflZT5enoR1FuXLgYYGqnVEoZvmf9c2bVBpiOjYQ0c=',
+    ],
+  },
+});
 
 // ...
 
-const result = await multiply(3, 7);
+// This request will have public key pinning enabled
+const response = await fetch('google.com');
 ```
 
-## Contributing
+## ⚙️Options
+
+|Option|Type|Mandatory|Description|
+|--|--|--|--|
+|`includeSubdomains`|`boolean`|No|Whether all the subdomains of the specified domain should also be pinned.|
+|`publicKeyHashes`|`string[]`|Yes|An array of SSL pins, where each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info.|
+
+## 🤔FAQ
+
+<details id="public-key-hash">
+  <summary>How do I retrieve the base64-encoded SHA-256 public key hash of my certificates?</summary>
+
+  ### OpenSSL CLI
+  
+  #### Server
+  
+  Run the following command, replacing `<hostname>` with your server's hostname.
+  
+  ```sh
+  openssl s_client -servername <hostname> -connect <hostname>:443 | openssl x509 -pubkey -noout | openssl rsa -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
+  ```
+  
+  #### Certificate file
+  
+  ```sh
+  openssl x509 -in certificate.crt -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
+  ```
+  
+  ### SSL Labs
+  
+  If your server is accessible publicly, you can use https://www.ssllabs.com/ssltest/index.html to retrieve the public key hash of your certificates.
+  
+  ![ssllabs](https://user-images.githubusercontent.com/1888212/224491992-f315c9b0-1cd5-4ad1-a02a-b32a9fc52493.jpg)
+  
+</details>
+
+## 📚References
+
+- [OWASP](https://owasp.org/www-community/controls/Certificate_and_Public_Key_Pinning)
+- [TrustKit additional notes](https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md#additional-notes)
+
+## 🤝Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
-## License
+## ✅License
 
 MIT
 
