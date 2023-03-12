@@ -9,7 +9,8 @@ Simple and secure SSL public key pinning for React Native. Uses [OkHttp Certific
 
 - ✅ Supports SSL public key pinning using the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info.
 - ✅ **No native configuration needed.** Simply install and configure through the provided JS API.
-- ✅ **No need to modify existing network request code.** All network requests in your application will have the certificate pinning configuration automatically enabled after initialization. 
+- ✅ **No modification of existing network request code needed.** All network requests in your application will have the certificate pinning configuration automatically enabled after initialization.
+- ✅ Compatible with Flipper network plugin.
 
 ## 🧰Installation
 
@@ -35,7 +36,7 @@ expo install react-native-ssl-public-key-pinning
 ```js
 import { initializeSslPinning } from 'react-native-ssl-public-key-pinning';
 
-initializeSslPinning({
+await initializeSslPinning({
   'google.com': {
     includeSubdomains: true,
     publicKeyHashes: [
@@ -58,8 +59,12 @@ const response = await fetch('google.com');
 
 |Option|Type|Mandatory|Description|
 |--|--|--|--|
-|`includeSubdomains`|`boolean`|No|Whether all the subdomains of the specified domain should also be pinned.|
+|`includeSubdomains`|`boolean`|No|Whether all subdomains of the specified domain should also be pinned. Defaults to `false`.|
 |`publicKeyHashes`|`string[]`|Yes|An array of SSL pins, where each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info.|
+
+## 📝Notes
+
+- On iOS, SSL sessions are cached. If an SSL connection to your server previously succeeded, setting a pinning configuration that should fail the next request would not actually fail it since the previous session is used. You will need to restart your app to clear our this cache.
 
 ## 🤔FAQ
 
@@ -93,13 +98,9 @@ const response = await fetch('google.com');
 ## 📚References
 
 - [OWASP](https://owasp.org/www-community/controls/Certificate_and_Public_Key_Pinning)
-- [TrustKit additional notes](https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md#additional-notes)
+- [OkHttp](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-certificate-pinner/)
+- [TrustKit](https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md#additional-notes)
 
 ## 🤝Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## ✅License
-
-MIT
-
