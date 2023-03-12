@@ -1,48 +1,34 @@
 #import "SslPublicKeyPinning.h"
+
 #import "TrustKit/TrustKit.h"
+
+#import <React/RCTHTTPRequestHandler.h>
 
 static NSString *ErrorDomain = @"SslPublicKeyPinningErrorDomain";
 
 static NSString *kIncludeSubdomains = @"includeSubdomains";
 static NSString *kPublicKeyHashes = @"publicKeyHashes";
 
-static BOOL isTrustKitInitialized = NO;
+static TrustKit *trustKitInstance = nil;
 
 @implementation SslPublicKeyPinning
 RCT_EXPORT_MODULE()
 
 - (void) initializeTrustKit:(NSDictionary *)options {
-    NSMutableDictionary *trustKitConfig = [NSMutableDictionary dictionary];
-    
     NSMutableDictionary *pinnedDomains = [NSMutableDictionary dictionary];
     
     NSArray *keys = [options allKeys];
     for (NSString *domain in keys) {
         NSDictionary *domainOptions = [options valueForKey:domain];
         
-        NSMutableDictionary *domainConfig = [NSMutableDictionary dictionary];
-        
-        BOOL includeSubdomains = [[domainOptions objectForKey:kIncludeSubdomains] boolValue];
-        [domainConfig setObject:@(includeSubdomains) forKey:kTSKIncludeSubdomains];
-        
-        if ([[domainOptions valueForKey:kPublicKeyHashes] isKindOfClass:[NSArray class]]) {
-            [domainConfig setObject:[domainOptions valueForKey:kPublicKeyHashes] forKey:kTSKPublicKeyHashes];
-        }
-        
-        [domainConfig setObject:@YES forKey:kTSKDisableDefaultReportUri];
-        
-        [pinnedDomains setObject:domainConfig forKey:domain];
+        [pinnedDomains setObject:@{
+            kTSKIncludeSubdomains: @([[domainOptions objectForKey:kIncludeSubdomains] boolValue]),
+            kTSKPublicKeyHashes: [domainOptions valueForKey:kPublicKeyHashes],
+            kTSKDisableDefaultReportUri: @YES,
+        } forKey:domain];
     }
     
-    [trustKitConfig setObject:pinnedDomains forKey:kTSKPinnedDomains];
-    
-    if (!isTrustKitInitialized) {
-        [trustKitConfig setObject:@YES forKey:kTSKSwizzleNetworkDelegates];
-        [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
-        isTrustKitInitialized = YES;
-    } else {
-        (void)[[TrustKit sharedInstance] initWithConfiguration:trustKitConfig];
-    }
+    trustKitInstance = [[TrustKit alloc] initWithConfiguration:@{ kTSKPinnedDomains: pinnedDomains }];
 }
 
 RCT_REMAP_METHOD(initialize,
@@ -78,5 +64,24 @@ RCT_REMAP_METHOD(initialize,
     return std::make_shared<facebook::react::NativeSslPublicKeyPinningSpecJSI>(params);
 }
 #endif
+
+@end
+
+@implementation RCTHTTPRequestHandler (SslPublicKeyPinning)
+
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+{
+    // Pass the authentication challenge to the validator; if the validation fails, the connection will be blocked
+    if (trustKitInstance == nil
+        || ![[trustKitInstance pinningValidator] handleChallenge:challenge completionHandler:completionHandler])
+    {
+        // TrustKit did not handle this challenge: perhaps it was not for server trust
+        // or the domain was not pinned. Fall back to the default behavior
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+    }
+}
 
 @end
