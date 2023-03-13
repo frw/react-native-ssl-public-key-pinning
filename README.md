@@ -9,8 +9,8 @@ Simple and secure SSL public key pinning for React Native. Uses [OkHttp Certific
 
 - ✅ Supports SSL public key pinning using the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info.
 - ✅ **No native configuration needed.** Simply install and configure through the provided JS API.
-- ✅ **No modification of existing network request code needed.** All network requests in your application will have the certificate pinning configuration automatically enabled after initialization.
-- ✅ Compatible with Flipper network plugin.
+- ✅ **No modification of existing network request code needed.** All network requests done through the standard [Networking APIs](https://reactnative.dev/docs/network) will have the certificate pinning configuration automatically enabled after initialization.
+- ✅ Compatible with Flipper Network plugin for easier debugging of network requests.
 
 ## 🧰Installation
 
@@ -62,9 +62,13 @@ const response = await fetch('google.com');
 |`includeSubdomains`|`boolean`|No|Whether all subdomains of the specified domain should also be pinned. Defaults to `false`.|
 |`publicKeyHashes`|`string[]`|Yes|An array of SSL pins, where each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info.|
 
-## 📝Notes
+## 📝Additional Notes
 
-- On iOS, SSL sessions are cached. If an SSL connection to your server previously succeeded, setting a pinning configuration that should fail the next request would not actually fail it since the previous session is used. You will need to restart your app to clear our this cache.
+- On iOS, SSL/TLS sessions are cached. If a connection to your site previously succeeded, setting a pinning configuration that should fail the next request would not actually fail it since the previous session is used. You will need to restart your app to clear out this cache.
+- Third-party libraries that make use of `fetch` would also be affected by the pinning. However, native libraries that implement their own ways of performing network requests would not be affected by the pinning configuration.
+- In order to prevent accidentally locking users out of your site, make sure you have at least one backup pin and that you have procedures in place to transition to using the backup pin if your primary pin can no longer be used. Read more about this [here](https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md#always-provide-at-least-one-backup-pin).
+- You can also implement an OTA update mechanism (e.g. through [`react-native-code-push`](https://github.com/microsoft/react-native-code-push) or [`expo-updates`](https://docs.expo.dev/versions/latest/sdk/updates/)) to ensure your key hashes are up to date without needing users to download a new version from the Play Store/App Store since all pinning configurations are done through the JS API.
+
 
 ## 🤔FAQ
 
@@ -89,7 +93,7 @@ const response = await fetch('google.com');
   
   ### SSL Labs
   
-  If your server is accessible publicly, you can use https://www.ssllabs.com/ssltest/index.html to retrieve the public key hash of your certificates.
+  If your site is accessible publicly, you can use https://www.ssllabs.com/ssltest/index.html to retrieve the public key hash of your certificates.
   
   ![ssllabs](https://user-images.githubusercontent.com/1888212/224491992-f315c9b0-1cd5-4ad1-a02a-b32a9fc52493.jpg)
   
@@ -99,7 +103,7 @@ const response = await fetch('google.com');
 
 - [OWASP](https://owasp.org/www-community/controls/Certificate_and_Public_Key_Pinning)
 - [OkHttp](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-certificate-pinner/)
-- [TrustKit](https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md#additional-notes)
+- [TrustKit](https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md)
 
 ## 🤝Contributing
 
