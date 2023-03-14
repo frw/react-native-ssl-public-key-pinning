@@ -17,12 +17,20 @@ Simple and secure SSL public key pinning for React Native. Uses [OkHttp Certific
 ### React Native
 ```sh
 npm install react-native-ssl-public-key-pinning
-npx pod-install
+```
+OR for Yarn use:
+```sh
+yarn add react-native-ssl-public-key-pinning
+```
+Before building for iOS, make sure to run the following commands:
+```sh
+cd ios && pod install && cd ..
 ```
 
 ### Expo
 ```sh
-expo install react-native-ssl-public-key-pinning
+npx expo install react-native-ssl-public-key-pinning
+npx expo prebuild
 ```
 
 ## 🚀Usage
@@ -54,6 +62,12 @@ await initializeSslPinning({
 // This request will have public key pinning enabled
 const response = await fetch('google.com');
 ```
+
+## 💡API Reference
+|API|Description|
+|--|--|
+|`isSslPinningAvailable(): boolean`|Returns whether the `SslPublicKeyPinning` NativeModule is available on the current app installation. Useful if you're using Expo Go and want to avoid initializing pinning if it's not available.|
+|`initializeSslPinning(options: PinningOptions): Promise<void>`|Initializes and enables SSL public key pinning for the domains and options you specify.|
 
 ## ⚙️Options
 
