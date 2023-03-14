@@ -104,7 +104,9 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule {
           if (previousCustomClientBuilder != null) {
             previousCustomClientBuilder.apply(builder);
           }
-          builder.certificatePinner(certificatePinner);
+          if (certificatePinner != null) {
+            builder.certificatePinner(certificatePinner);
+          }
         });
   }
 
@@ -117,5 +119,11 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule {
     } catch (Throwable t) {
       promise.reject(t);
     }
+  }
+
+  @ReactMethod
+  public void disable(Promise promise) {
+    certificatePinner = null;
+    promise.resolve(null);
   }
 }

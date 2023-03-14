@@ -31,3 +31,7 @@ export function isSslPinningAvailable(): boolean {
 export function initializeSslPinning(options: PinningOptions): Promise<void> {
   return SslPublicKeyPinning.initialize(options);
 }
+
+export function disableSslPinning(): Promise<void> {
+  return SslPublicKeyPinning.disable();
+}
