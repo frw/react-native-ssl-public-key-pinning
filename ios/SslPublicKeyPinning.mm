@@ -42,18 +42,19 @@ RCT_REMAP_METHOD(initialize,
     }
     @catch (NSException *exception)
     {
-        NSMutableDictionary * info = [NSMutableDictionary dictionary];
-        [info setValue:exception.name forKey:@"ExceptionName"];
-        [info setValue:exception.reason forKey:@"ExceptionReason"];
-        [info setValue:exception.callStackReturnAddresses forKey:@"ExceptionCallStackReturnAddresses"];
-        [info setValue:exception.callStackSymbols forKey:@"ExceptionCallStackSymbols"];
-        [info setValue:exception.userInfo forKey:@"ExceptionUserInfo"];
-        
-        reject(@"initialization_failed", @"Failed to initialize SslPublicKeyPinning",
+        reject(exception.name, exception.reason,
                [NSError errorWithDomain: ErrorDomain
                                    code: -2
-                               userInfo: info]);
+                               userInfo: exception.userInfo]);
     }
+}
+
+RCT_REMAP_METHOD(disable,
+                 withResolver:(RCTPromiseResolveBlock)resolve
+                 withRejecter:(RCTPromiseRejectBlock)reject)
+{
+    trustKitInstance = nil;
+    resolve(nil);
 }
 
 // Don't compile this code when we build for the old architecture.
