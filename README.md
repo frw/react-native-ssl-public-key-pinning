@@ -1,7 +1,8 @@
 <h1 align="center">react-native-ssl-public-key-pinning</h1>
 
-[![Package Version](https://img.shields.io/npm/v/react-native-ssl-public-key-pinning?style=for-the-badge)](https://www.npmjs.com/package/react-native-ssl-public-key-pinning)
-[![MIT License](https://img.shields.io/github/license/frw/react-native-ssl-public-key-pinning?style=for-the-badge)](LICENSE)
+[![MIT License](https://img.shields.io/github/license/frw/react-native-ssl-public-key-pinning)](LICENSE)
+[![Package Version](https://img.shields.io/npm/v/react-native-ssl-public-key-pinning)](https://www.npmjs.com/package/react-native-ssl-public-key-pinning)
+![GitHub Repo stars](https://img.shields.io/github/stars/frw/react-native-ssl-public-key-pinning?style=social)
 
 Simple and secure SSL public key pinning for React Native. Uses [OkHttp CertificatePinner](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-certificate-pinner/) on Android and [TrustKit](https://github.com/datatheorem/TrustKit) on iOS.
 
