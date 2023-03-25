@@ -43,14 +43,14 @@ export default function App() {
   }, []);
 
   const onSubmit = React.useCallback(async () => {
-    await initializeSslPinning({
-      [domain]: {
-        includeSubdomains: true,
-        publicKeyHashes: publicKeyHashes.trim().split('\n'),
-      },
-    });
-
     try {
+      await initializeSslPinning({
+        [domain]: {
+          includeSubdomains: true,
+          publicKeyHashes: publicKeyHashes.trim().split('\n'),
+        },
+      });
+
       const response = await fetch(`https://${domain}`);
       setResult(`${response.ok ? '✅' : '❌'} Status: ${response.status}`);
     } catch (e) {
@@ -89,17 +89,34 @@ export default function App() {
 
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
-          <Button title="Valid Example" color="green" onPress={onFillValid} />
+          <Button
+            testID="ValidExample"
+            title="Valid Example"
+            color="green"
+            onPress={onFillValid}
+          />
         </View>
         <View style={styles.button}>
-          <Button title="Invalid Example" color="red" onPress={onFillInvalid} />
+          <Button
+            testID="InvalidExample"
+            title="Invalid Example"
+            color="red"
+            onPress={onFillInvalid}
+          />
         </View>
         <View style={styles.button}>
-          <Button title="Test Pinning" color="deepskyblue" onPress={onSubmit} />
+          <Button
+            testID="TestPinning"
+            title="Test Pinning"
+            color="deepskyblue"
+            onPress={onSubmit}
+          />
         </View>
       </View>
 
-      <Text style={styles.result}>{result}</Text>
+      <Text testID="ResultOutput" style={styles.result}>
+        {result}
+      </Text>
     </ScrollView>
   );
 }
