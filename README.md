@@ -2,6 +2,7 @@
 
 [![MIT License](https://img.shields.io/github/license/frw/react-native-ssl-public-key-pinning)](LICENSE)
 [![Package Version](https://img.shields.io/npm/v/react-native-ssl-public-key-pinning)](https://www.npmjs.com/package/react-native-ssl-public-key-pinning)
+[![CI](https://github.com/frw/react-native-ssl-public-key-pinning/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/frw/react-native-ssl-public-key-pinning/actions/workflows/ci.yml)
 ![GitHub Repo stars](https://img.shields.io/github/stars/frw/react-native-ssl-public-key-pinning?style=social)
 
 Simple and secure SSL public key pinning for React Native. Uses [OkHttp CertificatePinner](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-certificate-pinner/) on Android and [TrustKit](https://github.com/datatheorem/TrustKit) on iOS.
@@ -68,7 +69,7 @@ const response = await fetch('google.com');
 |API|Description|
 |--|--|
 |`isSslPinningAvailable(): boolean`|Returns whether the `SslPublicKeyPinning` NativeModule is available on the current app installation. Useful if you're using Expo Go and want to avoid initializing pinning if it's not available.|
-|`initializeSslPinning(options: PinningOptions): Promise<void>`|Initializes and enables SSL public key pinning for the domains and options you specify.|
+|`initializeSslPinning(options: PinningOptions): Promise<void>`|Initializes and enables SSL public key pinning for the domains and options you specify. Note that [at least two pins are needed per configured domain on iOS](#additional-notes).|
 |`disableSslPinning(): Promise<void>`|Disables SSL public key pinning.|
 
 ## ⚙️Options
