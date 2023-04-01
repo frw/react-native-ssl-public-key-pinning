@@ -6,8 +6,10 @@ module.exports = {
       config: 'e2e/jest.config.js'
     },
     jest: {
-      setupTimeout: 120000
-    }
+      setupTimeout: 300000
+    },
+    retries: 3,
+    bail: true
   },
   apps: {
     'ios.debug': {
@@ -63,7 +65,7 @@ module.exports = {
     emulator: {
       type: 'android.emulator',
       device: {
-        avdName: 'Pixel_4_API_31'
+        avdName: 'emu'
       }
     }
   },

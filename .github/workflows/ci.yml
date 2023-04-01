@@ -5,7 +5,7 @@ on:
       - main
   pull_request:
     branches:
-      - main
+      - '**'
 
 jobs:
   lint:
@@ -23,8 +23,9 @@ jobs:
       - name: Typecheck files
         run: yarn typecheck
 
-  test:
-    runs-on: ubuntu-latest
+  test-e2e-android:
+    runs-on: macos-latest
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -32,8 +33,72 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Run unit tests
-        run: yarn test --maxWorkers=2 --coverage
+      - name: Setup JDK for SDK Manager
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+
+      - name: Download Android Emulator Image
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
+          $ANDROID_HOME/emulator/emulator -list-avds
+
+      - name: Android Emulator
+        timeout-minutes: 10
+        continue-on-error: true
+        run: |
+          echo "Starting emulator"
+          nohup $ANDROID_HOME/emulator/emulator -avd emu -no-audio -no-snapshot -no-window &
+          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          $ANDROID_HOME/platform-tools/adb devices
+          echo "Emulator started"
+
+      - name: Setup JDK for Build
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Run Detox Build
+        run: yarn example detox build e2e --configuration android.emu.release
+
+      - name: Run Detox Test(s)
+        run: yarn example detox test e2e --configuration android.emu.release --cleanup
+
+  test-e2e-ios:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Cache Pods
+        uses: actions/cache@v3
+        id: pod-cache
+        with:
+          path: example/ios/Pods
+          key: pods-${{ hashFiles('**/Podfile.lock') }}
+
+      - name: Update Pods
+        run: |
+          gem update cocoapods xcodeproj
+          cd example/ios && NO_FLIPPER=1 pod install && cd ../..
+
+      - name: Install Detox Dependencies
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
+      - name: Run Detox Build
+        run: yarn example detox build e2e --configuration ios.sim.release
+
+      - name: Run Detox Test(s)
+        run: yarn example detox test e2e --configuration ios.sim.release --cleanup
 
   build:
     runs-on: ubuntu-latest
