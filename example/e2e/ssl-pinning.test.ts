@@ -1,4 +1,4 @@
-/* eslint-env detox/detox, jest */
+import { by, device, expect, element } from 'detox';
 
 describe('SSL Pinning', () => {
   beforeEach(async () => {

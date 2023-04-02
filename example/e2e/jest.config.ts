@@ -1,7 +1,8 @@
-/** @type {import('@jest/types').Config.InitialOptions} */
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
   rootDir: '..',
-  testMatch: ['<rootDir>/e2e/**/*.test.js'],
+  testMatch: ['<rootDir>/e2e/**/*.test.ts'],
   testTimeout: 120000,
   maxWorkers: 1,
   globalSetup: 'detox/runners/jest/globalSetup',
@@ -10,3 +11,5 @@ module.exports = {
   testEnvironment: 'detox/runners/jest/testEnvironment',
   verbose: true,
 };
+
+export default config;
