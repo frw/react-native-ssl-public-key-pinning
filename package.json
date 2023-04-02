@@ -1,7 +1,7 @@
 {
   "name": "react-native-ssl-public-key-pinning",
   "version": "1.0.0",
-  "description": "Simple and secure SSL public key pinning for React Native",
+  "description": "Simple and secure SSL public key pinning for React Native. No native configuration needed, set up in <5 minutes.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",

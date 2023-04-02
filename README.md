@@ -69,7 +69,7 @@ const response = await fetch('google.com');
 |API|Description|
 |--|--|
 |`isSslPinningAvailable(): boolean`|Returns whether the `SslPublicKeyPinning` NativeModule is available on the current app installation. Useful if you're using Expo Go and want to avoid initializing pinning if it's not available.|
-|`initializeSslPinning(options: PinningOptions): Promise<void>`|Initializes and enables SSL public key pinning for the domains and options you specify. Note that [at least two pins are needed per configured domain on iOS](#additional-notes).|
+|`initializeSslPinning(options: PinningOptions): Promise<void>`|Initializes and enables SSL public key pinning for the domains and options you specify.|
 |`disableSslPinning(): Promise<void>`|Disables SSL public key pinning.|
 
 ## ⚙️Options
@@ -77,7 +77,7 @@ const response = await fetch('google.com');
 |Option|Type|Mandatory|Description|
 |--|--|--|--|
 |`includeSubdomains`|`boolean`|No|Whether all subdomains of the specified domain should also be pinned. Defaults to `false`.|
-|`publicKeyHashes`|`string[]`|Yes|An array of SSL pins, where each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info.|
+|`publicKeyHashes`|`string[]`|Yes|An array of SSL pins, where each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info. Note that [at least two pins are needed per domain on iOS](#additional-notes).|
 
 ## 📝Additional Notes
 
