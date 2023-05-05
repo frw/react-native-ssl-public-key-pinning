@@ -84,7 +84,7 @@ const response = await fetch('google.com');
 - On iOS, SSL/TLS sessions are cached. If a connection to your site previously succeeded, setting a pinning configuration that should fail the following request would not actually fail it since the previous session is used. You will need to restart your app to clear out this cache.
 - Third-party libraries that use `fetch` or `XMLHttpRequest` would also be affected by the pinning (e.g. `axios`). However, native libraries that implement their own methods of performing network requests would not be affected by the pinning configuration.
 - To prevent accidentally locking users out of your site, ensure you have at least one backup pin and have procedures in place to transition to using the backup pin if your primary pin can no longer be used. Read more about this [here](https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md#always-provide-at-least-one-backup-pin). Further, TrustKit (native iOS library) [enforces two pins](https://github.com/datatheorem/TrustKit/commit/7a8b422216e29df400603fb969ab24af17c6856a) which will cause `initializeSslPinning` to throw an exception if only one pin is provided. 
-- You can also implement an OTA update mechanism through some libraries that enable this capability (e.g. [`react-native-code-push`](https://github.com/microsoft/react-native-code-push) or [`expo-updates`](https://docs.expo.dev/versions/latest/sdk/updates/)). Doing this will help ensure your key hashes are up to date without needing users to download a new version from the Play Store/App Store since all pinning configurations are done through the JS API.
+- You can also implement an OTA update mechanism through libraries like [`react-native-code-push`](https://github.com/microsoft/react-native-code-push) or [`expo-updates`](https://docs.expo.dev/versions/latest/sdk/updates/). Doing this will help ensure your key hashes are up to date without needing users to download a new version from the Play Store/App Store since all pinning configurations are done through the JS API.
 
 
 ## 🤔FAQ
@@ -113,6 +113,32 @@ const response = await fetch('google.com');
   If your site is accessible publicly, you can use https://www.ssllabs.com/ssltest/index.html to retrieve the public key hash of your certificates.
   
   ![ssllabs](https://user-images.githubusercontent.com/1888212/224491992-f315c9b0-1cd5-4ad1-a02a-b32a9fc52493.jpg)
+  
+</details>
+
+<details id="check-setup">
+  <summary>How do I ensure that everything is set up correctly?</summary>
+  
+  An easy way to test you've set everything up correctly is by temporarily providing the wrong public key hashes to `initializeSslPinning`. For example:
+  
+```
+await initializeSslPinning({
+  'google.com': {
+    includeSubdomains: true,
+    publicKeyHashes: [
+      'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
+      'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=',
+    ],
+  },
+});
+
+// ...
+
+// This request should fail with an error
+const response = await fetch('google.com');
+```
+
+Any requests you make to the pinned domain should fail since the server is not providing certificates that match your hashes. You can then switch back to the correct public key hashes while leaving everything else the same, and once you ensure the requests succeed again you'll know you've set it all up correctly!
   
 </details>
 
