@@ -62,7 +62,7 @@ await initializeSslPinning({
 // ...
 
 // This request will have public key pinning enabled
-const response = await fetch('google.com');
+const response = await fetch('https://google.com');
 ```
 
 ## 💡API Reference
@@ -135,7 +135,7 @@ await initializeSslPinning({
 // ...
 
 // This request should fail with an error
-const response = await fetch('google.com');
+const response = await fetch('https://google.com');
 ```
 
 Any requests you make to the pinned domain should fail since the server is not providing certificates that match your hashes. You can then switch back to the correct public key hashes while leaving everything else the same, and once you ensure the requests succeed again you'll know you've set it all up correctly!
