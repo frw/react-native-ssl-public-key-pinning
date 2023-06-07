@@ -81,8 +81,12 @@ const response = await fetch('https://www.google.com');
 
 ## 📝Additional Notes
 
+### Known Issues
+- This library should support [all currently supported versions of React Native](https://github.com/reactwg/react-native-releases#which-versions-are-currently-supported). However, older RN versions should also be compatible with this library, though it might be untested. You should go through the [process to check your setup](#check-setup) on both Android and iOS to ensure it works as expected. Do note that on Android React Native versions below v65, `includeSubdomains: true` is not supported and you have to match your domains exactly. This is because wildcard domain support (which this library uses for `includeSubdomains`) was only introduced in [OkHttp v4.3](https://square.github.io/okhttp/changelogs/changelog_4x/#version-430), and [RN v65 is the first version](https://github.com/facebook/react-native/releases/tag/v0.65.0) that upgraded OkHttp to v4.
 - On iOS, SSL/TLS sessions are cached. If a connection to your site previously succeeded, setting a pinning configuration that should fail the following request would not actually fail it since the previous session is used. You will need to restart your app to clear out this cache.
 - Third-party libraries that use `fetch` or `XMLHttpRequest` would also be affected by the pinning (e.g. `axios`). However, native libraries that implement their own methods of performing network requests would not be affected by the pinning configuration.
+
+### Best Practices
 - To prevent accidentally locking users out of your site, ensure you have at least one backup pin and have procedures in place to transition to using the backup pin if your primary pin can no longer be used. Read more about this [here](https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md#always-provide-at-least-one-backup-pin). Further, TrustKit (native iOS library) [enforces two pins](https://github.com/datatheorem/TrustKit/commit/7a8b422216e29df400603fb969ab24af17c6856a) which will cause `initializeSslPinning` to throw an exception if only one pin is provided. 
 - You can also implement an OTA update mechanism through libraries like [`react-native-code-push`](https://github.com/microsoft/react-native-code-push) or [`expo-updates`](https://docs.expo.dev/versions/latest/sdk/updates/). Doing this will help ensure your key hashes are up to date without needing users to download a new version from the Play Store/App Store since all pinning configurations are done through the JS API.
 
