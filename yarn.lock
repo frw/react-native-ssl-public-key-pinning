@@ -1434,9 +1434,9 @@
   integrity sha512-Ag+9YM4ocKQx9AarydN0KY2j0ErMHNIocPDrVo8zAE44xLTjEtz81OdR68/cydGtk6m6jDb5Za3r2useMzYmSw==
 
 "@evilmartians/lefthook@^1.2.2":
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/@evilmartians/lefthook/-/lefthook-1.4.4.tgz#57d032c6fd5ebd7e4fe89e64c6849596aa12c998"
-  integrity sha512-0DyKAkDHzI76Xs7a9kdozCkOXqdgHcAmG873d9Zv3BgG7oP1dGN4osPQPBLEi+gLAoI+f5cMZf5wWld0+es7Kw==
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/@evilmartians/lefthook/-/lefthook-1.4.5.tgz#07ab81f4f4682c9b780d946b432ddfd2c837f5c6"
+  integrity sha512-lZT4HTz86yRBgoKSh34vCiaiit6F2t858UAUFDRU7dLadllKOagDYKQ/qlDojLzA8QC0LxI/OYYk2fke71dAmQ==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
