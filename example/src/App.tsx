@@ -11,12 +11,14 @@ import {
   Platform,
 } from 'react-native';
 import {
+  addSslPinningErrorListener,
   disableSslPinning,
   initializeSslPinning,
   isSslPinningAvailable,
 } from 'react-native-ssl-public-key-pinning';
 
 const GOOGLE_DOMAIN = 'google.com';
+const TEST_GOOGLE_DOMAIN = 'www.google.com';
 
 // Google Trust Services https://pki.goog/repository/
 const GTS_HASHES = [
@@ -46,21 +48,24 @@ export default function App() {
 
   const [testDomain, setTestDomain] = React.useState('');
   const [fetchResult, setFetchResult] = React.useState('');
+  const [pinningError, setPinningError] = React.useState('');
 
   const onFillValid = React.useCallback(() => {
     setDomain(GOOGLE_DOMAIN);
     setPublicKeyHashes(GTS_HASHES);
-    setTestDomain(GOOGLE_DOMAIN);
+    setTestDomain(TEST_GOOGLE_DOMAIN);
     setInitializeResult('');
     setFetchResult('');
+    setPinningError('');
   }, []);
 
   const onFillInvalid = React.useCallback(() => {
     setDomain(GOOGLE_DOMAIN);
     setPublicKeyHashes(LE_HASHES);
-    setTestDomain(GOOGLE_DOMAIN);
+    setTestDomain(TEST_GOOGLE_DOMAIN);
     setInitializeResult('');
     setFetchResult('');
+    setPinningError('');
   }, []);
 
   const onInitializePinning = React.useCallback(async () => {
@@ -73,6 +78,7 @@ export default function App() {
       });
       setInitializeResult(`✅ Success Initializing`);
       setFetchResult('');
+      setPinningError('');
     } catch (e) {
       setInitializeResult(`❌ ${e}`);
     }
@@ -83,12 +89,15 @@ export default function App() {
       await disableSslPinning();
       setInitializeResult(`✅ Success Disabling`);
       setFetchResult('');
+      setPinningError('');
     } catch (e) {
       setInitializeResult(`❌ ${e}`);
     }
   }, []);
 
   const onFetch = React.useCallback(async () => {
+    setFetchResult('');
+    setPinningError('');
     try {
       const response = await fetch(`https://${testDomain}`);
       setFetchResult(`${response.ok ? '✅' : '❌'} Status: ${response.status}`);
@@ -96,6 +105,15 @@ export default function App() {
       setFetchResult(`❌ ${e}`);
     }
   }, [testDomain]);
+
+  React.useEffect(() => {
+    const subscription = addSslPinningErrorListener((error) => {
+      setPinningError(`Pinning Error: ${error.serverHostname}`);
+    });
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return (
     <KeyboardAvoidingView
@@ -215,6 +233,10 @@ export default function App() {
 
         <Text testID="FetchResultOutput" style={styles.result}>
           {fetchResult}
+        </Text>
+
+        <Text testID="PinningError" style={styles.result}>
+          {pinningError}
         </Text>
       </ScrollView>
     </KeyboardAvoidingView>

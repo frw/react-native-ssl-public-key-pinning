@@ -35,6 +35,9 @@ describe('SSL Pinning', () => {
     await expect(element(by.id('FetchResultOutput'))).toHaveText(
       '❌ TypeError: Network request failed'
     );
+    await expect(element(by.id('PinningError'))).toHaveText(
+      'Pinning Error: www.google.com'
+    );
   });
 
   it('should succeed fetch with unrelated pins', async () => {
@@ -92,6 +95,9 @@ describe('SSL Pinning', () => {
     await element(by.id('TestFetch')).tap();
     await expect(element(by.id('FetchResultOutput'))).toHaveText(
       '❌ TypeError: Network request failed'
+    );
+    await expect(element(by.id('PinningError'))).toHaveText(
+      'Pinning Error: www.google.com'
     );
   });
 
