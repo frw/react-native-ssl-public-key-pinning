@@ -41,7 +41,7 @@ npx expo prebuild
 2. Call `initializeSslPinning` as early as possible in your App entry point with your SSL pinning configuration.
 3. All network requests in your app should now have SSL pinning enabled!
 
-### Example
+### Pinning Example
 
 ```js
 import { initializeSslPinning } from 'react-native-ssl-public-key-pinning';
@@ -65,12 +65,28 @@ await initializeSslPinning({
 const response = await fetch('https://www.google.com');
 ```
 
+### Listener Example
+```js
+import { addSslPinningErrorListener } from 'react-native-ssl-public-key-pinning';
+
+useEffect(() => {
+  const subscription = addSslPinningErrorListener((error) => {
+    // Triggered when an SSL pinning error occurs due to pin mismatch
+    console.log(error.serverHostname);
+  });
+  return () => {
+    subscription.remove();
+  };
+}, []);
+```
+
 ## 💡API Reference
 |API|Description|
 |--|--|
 |`isSslPinningAvailable(): boolean`|Returns whether the `SslPublicKeyPinning` NativeModule is available on the current app installation. Useful if you're using Expo Go and want to avoid initializing pinning if it's not available.|
 |`initializeSslPinning(options: PinningOptions): Promise<void>`|Initializes and enables SSL public key pinning for the domains and options you specify.|
 |`disableSslPinning(): Promise<void>`|Disables SSL public key pinning.|
+|`addSslPinningErrorListener(callback: ErrorListenerCallback): EmitterSubscription`|Subscribes to SSL pinning errors due to pin mismatch. Useful if you would like to report errors or inform the user of security issues.|
 
 ## ⚙️Options
 
