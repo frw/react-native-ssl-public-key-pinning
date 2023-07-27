@@ -5,8 +5,9 @@
 @interface SslPublicKeyPinning : NSObject <NativeSslPublicKeyPinningSpec>
 #else
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
-@interface SslPublicKeyPinning : NSObject <RCTBridgeModule>
+@interface SslPublicKeyPinning : RCTEventEmitter <RCTBridgeModule>
 #endif
 
 @end

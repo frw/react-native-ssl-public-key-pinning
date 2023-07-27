@@ -9,10 +9,32 @@ static NSString *ErrorDomain = @"SslPublicKeyPinningErrorDomain";
 static NSString *kIncludeSubdomains = @"includeSubdomains";
 static NSString *kPublicKeyHashes = @"publicKeyHashes";
 
+
+static NSString *PinningErrorEventName = @"pinning-error";
+static NSString *kServerHostname = @"serverHostname";
+
 static TrustKit *trustKitInstance = nil;
 
-@implementation SslPublicKeyPinning
+@implementation SslPublicKeyPinning {
+    bool hasListeners;
+}
 RCT_EXPORT_MODULE()
+
+- (NSArray<NSString *> *) supportedEvents {
+    return @[PinningErrorEventName];
+}
+
+- (void) startObserving {
+    hasListeners = YES;
+}
+
+- (void) stopObserving {
+    hasListeners = NO;
+}
+
+- (void) emitPinningErrorEvent:(NSString *)serverHostname {
+    [self sendEventWithName:PinningErrorEventName body:@{ kServerHostname: serverHostname }];
+}
 
 - (void) initializeTrustKit:(NSDictionary *)options {
     NSMutableDictionary *pinnedDomains = [NSMutableDictionary dictionary];
@@ -29,6 +51,12 @@ RCT_EXPORT_MODULE()
     }
     
     trustKitInstance = [[TrustKit alloc] initWithConfiguration:@{ kTSKPinnedDomains: pinnedDomains }];
+    trustKitInstance.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy * _Nonnull policy) {
+        if (!self->hasListeners || result.evaluationResult != TSKTrustEvaluationFailedNoMatchingPin) {
+            return;
+        }
+        [self emitPinningErrorEvent:result.serverHostname];
+    };
 }
 
 RCT_REMAP_METHOD(initialize,

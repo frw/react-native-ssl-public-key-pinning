@@ -1,4 +1,5 @@
-import { NativeModules, Platform } from 'react-native';
+import { EmitterSubscription } from 'react-native';
+import { NativeModules, Platform, NativeEventEmitter } from 'react-native';
 
 const LINKING_ERROR =
   `The package 'react-native-ssl-public-key-pinning' doesn't seem to be linked. Make sure: \n\n` +
@@ -17,6 +18,8 @@ const SslPublicKeyPinning = NativeModules.SslPublicKeyPinning
       }
     );
 
+const PINNING_ERROR_EVENT_NAME = 'pinning-error';
+
 export type DomainOptions = {
   /**
    * Whether all subdomains of the specified domain should also be pinned.
@@ -31,6 +34,13 @@ export type DomainOptions = {
 };
 
 export type PinningOptions = Record<string, DomainOptions>;
+
+export type PinningError = {
+  serverHostname: string;
+  message?: string;
+};
+
+export type ErrorListenerCallback = (error: PinningError) => void;
 
 /**
  * Checks whether the SslPublicKeyPinning NativeModule is available on the current app installation.
@@ -56,4 +66,15 @@ export function initializeSslPinning(options: PinningOptions): Promise<void> {
  */
 export function disableSslPinning(): Promise<void> {
   return SslPublicKeyPinning.disable();
+}
+
+let emitter: NativeEventEmitter | null = null;
+
+export function addSslPinningErrorListener(
+  callback: ErrorListenerCallback
+): EmitterSubscription {
+  if (emitter == null) {
+    emitter = new NativeEventEmitter(NativeModules.SslPublicKeyPinning);
+  }
+  return emitter.addListener(PINNING_ERROR_EVENT_NAME, callback);
 }
