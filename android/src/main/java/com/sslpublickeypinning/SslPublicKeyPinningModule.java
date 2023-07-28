@@ -42,8 +42,6 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule implem
   private static CertificatePinner certificatePinner = null;
   private static boolean isCustomClientBuilderInitialized = false;
 
-  private static int listenerCount = 0;
-
   public SslPublicKeyPinningModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
@@ -120,10 +118,7 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule implem
             previousCustomClientBuilder.apply(builder);
           }
           if (certificatePinner != null) {
-            builder.certificatePinner(certificatePinner);
-            if (listenerCount > 0) {
-              builder.addInterceptor(this);
-            }
+            builder.certificatePinner(certificatePinner).addInterceptor(this);
           }
         });
   }
@@ -174,11 +169,9 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule implem
 
   @ReactMethod
   public void addListener(String eventName) {
-    listenerCount += 1;
   }
 
   @ReactMethod
   public void removeListeners(Integer count) {
-    listenerCount -= count;
   }
 }
