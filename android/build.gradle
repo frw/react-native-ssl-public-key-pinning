@@ -37,7 +37,7 @@ android {
   def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
   //Apply namespace only if android gradle plugin version equal or greater than 7
   if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
-    namespace "com.swmansion.gesturehandler"
+    namespace "com.sslpublickeypinning"
   }
 
   defaultConfig {
