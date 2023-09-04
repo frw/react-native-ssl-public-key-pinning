@@ -127,12 +127,27 @@ useEffect(() => {
   ```sh
   openssl x509 -in certificate.crt -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
   ```
+
+  #### Private SSL key
+
+  1. Convert private key to public pem key:
+
+  ```
+  openssl rsa -in private.key -pubout -out public_key.pem
+  ```
+
+  2. generate hash from public key
+
+  ```
+  openssl rsa -in public_key.pem -pubin -outform DER | openssl dgst -sha256 -binary | openssl enc -base64
+  ```
   
   ### SSL Labs
   
   If your site is accessible publicly, you can use https://www.ssllabs.com/ssltest/index.html to retrieve the public key hash of your certificates.
   
   ![ssllabs](https://user-images.githubusercontent.com/1888212/224491992-f315c9b0-1cd5-4ad1-a02a-b32a9fc52493.jpg)
+
   
 </details>
 
