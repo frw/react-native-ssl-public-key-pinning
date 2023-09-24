@@ -33,5 +33,6 @@ Pod::Spec.new do |s|
     s.dependency "ReactCommon/turbomodule/core"
   end
 
+  s.dependency "React-RCTNetwork"
   s.dependency "TrustKit"
 end
