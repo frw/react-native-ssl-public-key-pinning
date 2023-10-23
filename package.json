@@ -63,7 +63,7 @@
     "@types/node": "^20.1.1",
     "@types/react": "~18.2.15",
     "@types/react-native": "0.72.3",
-    "commitlint": "^17.7.1",
+    "commitlint": "^18.0.0",
     "del-cli": "^5.0.0",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
