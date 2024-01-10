@@ -375,7 +375,7 @@ PODS:
   - React-jsinspector (0.72.3)
   - React-logger (0.72.3):
     - glog
-  - react-native-ssl-public-key-pinning (1.1.2):
+  - react-native-ssl-public-key-pinning (1.1.3):
     - React-Core
     - React-RCTNetwork
     - TrustKit
@@ -696,7 +696,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 59d1eb03af7d30b7d66589c410f13151271e8006
   React-jsinspector: b511447170f561157547bc0bef3f169663860be7
   React-logger: c5b527272d5f22eaa09bb3c3a690fee8f237ae95
-  react-native-ssl-public-key-pinning: d72015071749532d6201cffa2f22990ebbeee6ad
+  react-native-ssl-public-key-pinning: 7b5272efa81144da691d0a27bcd853e2df3d8cef
   React-NativeModulesApple: c57f3efe0df288a6532b726ad2d0322a9bf38472
   React-perflogger: 6bd153e776e6beed54c56b0847e1220a3ff92ba5
   React-RCTActionSheet: c0b62af44e610e69d9a2049a682f5dba4e9dff17
@@ -719,6 +719,6 @@ SPEC CHECKSUMS:
   Yoga: 8796b55dba14d7004f980b54bcc9833ee45b28ce
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 20595b4f3de9daddd7dff99826bc468659de5825
+PODFILE CHECKSUM: 27ebb492772f61bc1815395870fca8234cedc6b7
 
 COCOAPODS: 1.12.0
