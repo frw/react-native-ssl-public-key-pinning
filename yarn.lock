@@ -2401,14 +2401,6 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
-"@react-native/virtualized-lists@^0.72.4":
-  version "0.72.8"
-  resolved "https://registry.yarnpkg.com/@react-native/virtualized-lists/-/virtualized-lists-0.72.8.tgz#a2c6a91ea0f1d40eb5a122fb063daedb92ed1dc3"
-  integrity sha512-J3Q4Bkuo99k7mu+jPS9gSUSgq+lLRSI/+ahXNwV92XgJ/8UgOTxu2LPwhJnBk/sQKxq7E8WkZBnBiozukQMqrw==
-  dependencies:
-    invariant "^2.2.4"
-    nullthrows "^1.1.1"
-
 "@release-it/conventional-changelog@^8.0.1":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@release-it/conventional-changelog/-/conventional-changelog-8.0.1.tgz#7aba0162769a001b11fa72ab05ca3f108c2657e3"
@@ -2601,15 +2593,14 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
-"@types/react-native@0.72.5":
-  version "0.72.5"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.72.5.tgz#33a0d0c3c724395ee05bb37255937dcb3fae6d5f"
-  integrity sha512-HAt+EC576kbyg3+qruzbOLgVhgDHTHJ3d3rTkWRJ0wukze+l3ldWUkh1IarERHqsUlWwmkuYu0+4TQE5y1EjwA==
+"@types/react-native@0.73.0":
+  version "0.73.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.73.0.tgz#b316be230745779814caa533360262140b0f5984"
+  integrity sha512-6ZRPQrYM72qYKGWidEttRe6M5DZBEV5F+MHMHqd4TTYx0tfkcdrUFGdef6CCxY0jXU7wldvd/zA/b0A/kTeJmA==
   dependencies:
-    "@react-native/virtualized-lists" "^0.72.4"
-    "@types/react" "*"
+    react-native "*"
 
-"@types/react@*", "@types/react@~18.2.15":
+"@types/react@~18.2.15":
   version "18.2.47"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.47.tgz#85074b27ab563df01fbc3f68dc64bf7050b0af40"
   integrity sha512-xquNkkOirwyCgoClNk85BjP+aqnIS+ckAJ8i37gAbDs14jfW/J23f2GItAf33oiUPQnqNMALiFeoM9Y5mbjpVQ==
@@ -8082,7 +8073,7 @@ react-native-builder-bob@^0.23.0:
     which "^2.0.2"
     yargs "^17.5.1"
 
-react-native@0.73.2:
+react-native@*, react-native@0.73.2:
   version "0.73.2"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.73.2.tgz#74ee163c8189660d41d1da6560411da7ce41a608"
   integrity sha512-7zj9tcUYpJUBdOdXY6cM8RcXYWkyql4kMyGZflW99E5EuFPoC7Ti+ZQSl7LP9ZPzGD0vMfslwyDW0I4tPWUCFw==
