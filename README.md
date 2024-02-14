@@ -29,9 +29,39 @@ Before building for iOS, make sure to run the following commands:
 cd ios && pod install && cd ..
 ```
 
-### Expo
+### Expo Managed Workflow
 ```sh
 npx expo install react-native-ssl-public-key-pinning
+```
+and then follow the steps to create a [development build](https://docs.expo.dev/develop/development-builds/create-a-build/) or [production build](https://docs.expo.dev/deploy/build-project/)
+
+#### Disable `expo-dev-client` Network Inspector on iOS (Optional)
+If you are building an iOS Expo development build and want to test out your pinning configuration, you will need to disable `expo-dev-client`'s network inspector as it [interferes with the pinning setup](https://github.com/frw/react-native-ssl-public-key-pinning/issues/223). Note that the network inspector is automatically disabled on production builds and so this library would function properly on production builds without needing to go through the following steps.
+
+1. Install `expo-build-properties`
+```
+npx expo install expo-build-properties
+```
+2. Add the following plugin configuration to your `app.json`
+```
+{
+  "expo": {
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "networkInspector": false
+          } 
+        }
+      ]
+    ]
+  }
+}
+
+```
+3. Run prebuild to update native files
+```
 npx expo prebuild
 ```
 
