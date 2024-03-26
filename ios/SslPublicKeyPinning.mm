@@ -59,10 +59,9 @@ RCT_EXPORT_MODULE()
     };
 }
 
-RCT_REMAP_METHOD(initialize,
-                 options:(NSDictionary *)options
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(initialize:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 {
     @try {
         [self initializeTrustKit:options];
@@ -77,9 +76,8 @@ RCT_REMAP_METHOD(initialize,
     }
 }
 
-RCT_REMAP_METHOD(disable,
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(disable:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 {
     trustKitInstance = nil;
     resolve(nil);

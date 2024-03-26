@@ -7,14 +7,12 @@ import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.modules.network.NetworkingModule;
 
@@ -28,8 +26,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-@ReactModule(name = SslPublicKeyPinningModule.NAME)
-public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule implements Interceptor {
+public class SslPublicKeyPinningModule extends SslPublicKeyPinningSpec implements Interceptor {
   public static final String NAME = "SslPublicKeyPinning";
 
   private static final String INCLUDE_SUBDOMAINS_KEY = "includeSubdomains";
@@ -70,8 +67,8 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule implem
       }
 
       boolean includeSubdomains =
-          domainOptions.hasKey(INCLUDE_SUBDOMAINS_KEY)
-              && domainOptions.getBoolean(INCLUDE_SUBDOMAINS_KEY);
+        domainOptions.hasKey(INCLUDE_SUBDOMAINS_KEY)
+          && domainOptions.getBoolean(INCLUDE_SUBDOMAINS_KEY);
 
       ReadableArray publicKeyHashes = domainOptions.getArray(PUBLIC_KEY_HASHES_KEY);
       if (publicKeyHashes == null) {
@@ -110,17 +107,17 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule implem
     isCustomClientBuilderInitialized = true;
 
     final NetworkingModule.CustomClientBuilder previousCustomClientBuilder =
-        getPreviousCustomClientBuilder();
+      getPreviousCustomClientBuilder();
 
     NetworkingModule.setCustomClientBuilder(
-        builder -> {
-          if (previousCustomClientBuilder != null) {
-            previousCustomClientBuilder.apply(builder);
-          }
-          if (certificatePinner != null) {
-            builder.certificatePinner(certificatePinner).addInterceptor(this);
-          }
-        });
+      builder -> {
+        if (previousCustomClientBuilder != null) {
+          previousCustomClientBuilder.apply(builder);
+        }
+        if (certificatePinner != null) {
+          builder.certificatePinner(certificatePinner).addInterceptor(this);
+        }
+      });
   }
 
   @ReactMethod
@@ -148,8 +145,8 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule implem
     }
 
     this.getReactApplicationContext()
-        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-        .emit(SSL_PINNING_ERROR_EVENT_NAME, map);
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+      .emit(SSL_PINNING_ERROR_EVENT_NAME, map);
   }
 
   @NonNull
@@ -172,6 +169,6 @@ public class SslPublicKeyPinningModule extends ReactContextBaseJavaModule implem
   }
 
   @ReactMethod
-  public void removeListeners(Integer count) {
+  public void removeListeners(double count) {
   }
 }
