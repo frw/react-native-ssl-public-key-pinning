@@ -944,7 +944,9 @@ PODS:
   - React-Mapbuffer (0.73.4):
     - glog
     - React-debug
-  - react-native-ssl-public-key-pinning (1.1.3):
+  - react-native-ssl-public-key-pinning (1.1.4):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
     - React-Core
     - React-RCTNetwork
     - TrustKit
@@ -1116,7 +1118,7 @@ PODS:
     - React-logger (= 0.73.4)
     - React-perflogger (= 0.73.4)
   - SocketRocket (0.6.1)
-  - TrustKit (3.0.3)
+  - TrustKit (3.0.4)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1353,7 +1355,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 9ac353eccf6ab54d1e0a33862ba91221d1e88460
   React-logger: 0a57b68dd2aec7ff738195f081f0520724b35dab
   React-Mapbuffer: 63913773ed7f96b814a2521e13e6d010282096ad
-  react-native-ssl-public-key-pinning: 7b5272efa81144da691d0a27bcd853e2df3d8cef
+  react-native-ssl-public-key-pinning: 81d7d8daa0dcfd846a3b3c874cc28effc8058e74
   React-nativeconfig: d7af5bae6da70fa15ce44f045621cf99ed24087c
   React-NativeModulesApple: 0123905d5699853ac68519607555a9a4f5c7b3ac
   React-perflogger: 8a1e1af5733004bdd91258dcefbde21e0d1faccd
@@ -1375,7 +1377,7 @@ SPEC CHECKSUMS:
   React-utils: 6e5ad394416482ae21831050928ae27348f83487
   ReactCommon: 840a955d37b7f3358554d819446bffcf624b2522
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  TrustKit: 7858ea59d0e226b1457b2e9cc8b95d77ab21d471
+  TrustKit: 403e8d2cfbff2abfc37cd41acc558dab8ec78e59
   Yoga: 64cd2a583ead952b0315d5135bf39e053ae9be70
 
 PODFILE CHECKSUM: 27ebb492772f61bc1815395870fca8234cedc6b7

@@ -145,7 +145,7 @@ jobs:
           name: detox-artifacts
           path: example/artifacts
 
-  build:
+  build-library:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -155,4 +155,4 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build package
-        run: yarn prepack
+        run: yarn prepare

@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   fetchDomainInput: {
-    flexGrow: 1,
+    flex: 1,
   },
   result: {
     textAlign: 'center',

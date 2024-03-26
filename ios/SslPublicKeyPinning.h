@@ -1,11 +1,11 @@
+#import <React/RCTEventEmitter.h>
 
 #ifdef RCT_NEW_ARCH_ENABLED
-#import "RNSslPublicKeyPinningSpec.h"
+#import <RNSslPublicKeyPinningSpec/RNSslPublicKeyPinningSpec.h>
 
-@interface SslPublicKeyPinning : NSObject <NativeSslPublicKeyPinningSpec>
+@interface SslPublicKeyPinning : RCTEventEmitter <NativeSslPublicKeyPinningSpec>
 #else
 #import <React/RCTBridgeModule.h>
-#import <React/RCTEventEmitter.h>
 
 @interface SslPublicKeyPinning : RCTEventEmitter <RCTBridgeModule>
 #endif

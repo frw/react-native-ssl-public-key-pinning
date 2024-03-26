@@ -1,5 +1,21 @@
-import { EmitterSubscription } from 'react-native';
-import { NativeModules, Platform, NativeEventEmitter } from 'react-native';
+import {
+  NativeModules,
+  Platform,
+  NativeEventEmitter,
+  type EmitterSubscription,
+} from 'react-native';
+import {
+  PINNING_ERROR_EVENT_NAME,
+  type ErrorListenerCallback,
+  type PinningOptions,
+} from './NativeSslPublicKeyPinning';
+
+export type {
+  DomainOptions,
+  PinningOptions,
+  PinningError,
+  ErrorListenerCallback,
+} from './NativeSslPublicKeyPinning';
 
 const LINKING_ERROR =
   `The package 'react-native-ssl-public-key-pinning' doesn't seem to be linked. Make sure: \n\n` +
@@ -7,8 +23,15 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const SslPublicKeyPinning = NativeModules.SslPublicKeyPinning
-  ? NativeModules.SslPublicKeyPinning
+// @ts-expect-error
+const isTurboModuleEnabled = global.__turboModuleProxy != null;
+
+const SslPublicKeyPinningModule = isTurboModuleEnabled
+  ? require('./NativeSslPublicKeyPinning').default
+  : NativeModules.SslPublicKeyPinning;
+
+const SslPublicKeyPinning = SslPublicKeyPinningModule
+  ? SslPublicKeyPinningModule
   : new Proxy(
       {},
       {
@@ -17,30 +40,6 @@ const SslPublicKeyPinning = NativeModules.SslPublicKeyPinning
         },
       }
     );
-
-const PINNING_ERROR_EVENT_NAME = 'pinning-error';
-
-export type DomainOptions = {
-  /**
-   * Whether all subdomains of the specified domain should also be pinned.
-   * @default false
-   */
-  includeSubdomains?: boolean;
-  /**
-   * An array of SSL pins, where each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info.
-   * Note that at least two pins are needed per domain on iOS.
-   */
-  publicKeyHashes: string[];
-};
-
-export type PinningOptions = Record<string, DomainOptions>;
-
-export type PinningError = {
-  serverHostname: string;
-  message?: string;
-};
-
-export type ErrorListenerCallback = (error: PinningError) => void;
 
 /**
  * Checks whether the SslPublicKeyPinning NativeModule is available on the current app installation.
@@ -74,7 +73,7 @@ export function addSslPinningErrorListener(
   callback: ErrorListenerCallback
 ): EmitterSubscription {
   if (emitter == null) {
-    emitter = new NativeEventEmitter(NativeModules.SslPublicKeyPinning);
+    emitter = new NativeEventEmitter(SslPublicKeyPinningModule);
   }
   return emitter.addListener(PINNING_ERROR_EVENT_NAME, callback);
 }
