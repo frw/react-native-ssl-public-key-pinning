@@ -86,7 +86,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: yarn example detox test e2e --configuration android.emu.release --headless --record-logs all
+          script: yarn example detox test e2e --configuration android.emu.release --headless --record-logs all --take-screenshots failing
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
@@ -136,7 +136,7 @@ jobs:
         run: yarn example detox build e2e --configuration ios.sim.release
 
       - name: Run Detox Test(s)
-        run: yarn example detox test e2e --configuration ios.sim.release --cleanup --headless --record-logs all
+        run: yarn example detox test e2e --configuration ios.sim.release --cleanup --headless --record-logs all --take-screenshots failing
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
