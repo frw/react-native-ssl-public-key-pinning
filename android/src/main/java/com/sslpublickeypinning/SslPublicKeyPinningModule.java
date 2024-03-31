@@ -18,6 +18,12 @@ import com.facebook.react.modules.network.NetworkingModule;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
 
@@ -31,6 +37,7 @@ public class SslPublicKeyPinningModule extends SslPublicKeyPinningSpec implement
 
   private static final String INCLUDE_SUBDOMAINS_KEY = "includeSubdomains";
   private static final String PUBLIC_KEY_HASHES_KEY = "publicKeyHashes";
+  private static final String EXPIRATION_DATE_KEY = "expirationDate";
 
   private static final String SSL_PINNING_ERROR_EVENT_NAME = "pinning-error";
   private static final String SSL_PINNING_ERROR_SERVER_HOSTNAME_EVENT_KEY = "serverHostname";
@@ -54,7 +61,7 @@ public class SslPublicKeyPinningModule extends SslPublicKeyPinningSpec implement
     return certificatePinner;
   }
 
-  private static void initializeCertificatePinner(ReadableMap options) {
+  private static void initializeCertificatePinner(ReadableMap options) throws ParseException {
     CertificatePinner.Builder builder = new CertificatePinner.Builder();
 
     ReadableMapKeySetIterator iterator = options.keySetIterator();
@@ -64,6 +71,17 @@ public class SslPublicKeyPinningModule extends SslPublicKeyPinningSpec implement
       ReadableMap domainOptions = options.getMap(domain);
       if (domainOptions == null) {
         continue;
+      }
+
+      String expirationDateStr = domainOptions.getString(EXPIRATION_DATE_KEY);
+      if (expirationDateStr != null) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        format.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date expirationDate = format.parse(expirationDateStr);
+        if (expirationDate != null && System.currentTimeMillis() > expirationDate.getTime()) {
+          Log.w(NAME, "Ignoring pinning configuration for " + domain + " as it has expired");
+          continue;
+        }
       }
 
       boolean includeSubdomains =

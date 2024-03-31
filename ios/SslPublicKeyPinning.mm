@@ -8,6 +8,7 @@ static NSString *ErrorDomain = @"SslPublicKeyPinningErrorDomain";
 
 static NSString *kIncludeSubdomains = @"includeSubdomains";
 static NSString *kPublicKeyHashes = @"publicKeyHashes";
+static NSString *kExpirationDate = @"expirationDate";
 
 
 static NSString *PinningErrorEventName = @"pinning-error";
@@ -42,12 +43,19 @@ RCT_EXPORT_MODULE()
     NSArray *keys = [options allKeys];
     for (NSString *domain in keys) {
         NSDictionary *domainOptions = [options valueForKey:domain];
+        NSMutableDictionary *trustkitDomainConfig = [NSMutableDictionary dictionary];
         
-        [pinnedDomains setObject:@{
-            kTSKIncludeSubdomains: @([[domainOptions objectForKey:kIncludeSubdomains] boolValue]),
-            kTSKPublicKeyHashes: [domainOptions valueForKey:kPublicKeyHashes],
-            kTSKDisableDefaultReportUri: @YES,
-        } forKey:domain];
+        [trustkitDomainConfig setObject:@([[domainOptions objectForKey:kIncludeSubdomains] boolValue]) forKey:kTSKIncludeSubdomains];
+        [trustkitDomainConfig setObject:[domainOptions valueForKey:kPublicKeyHashes] forKey:kTSKPublicKeyHashes];
+        
+        NSString *expirationDate = [domainOptions objectForKey:kExpirationDate];
+        if (expirationDate != nil) {
+            [trustkitDomainConfig setObject:expirationDate forKey:kTSKExpirationDate];
+        }
+        
+        [trustkitDomainConfig setObject:@YES forKey:kTSKDisableDefaultReportUri];
+        
+        [pinnedDomains setObject:trustkitDomainConfig forKey:domain];
     }
     
     trustKitInstance = [[TrustKit alloc] initWithConfiguration:@{ kTSKPinnedDomains: pinnedDomains }];

@@ -124,6 +124,7 @@ useEffect(() => {
 |--|--|--|--|
 |`includeSubdomains`|`boolean`|No|Whether all subdomains of the specified domain should also be pinned. Defaults to `false`.|
 |`publicKeyHashes`|`string[]`|Yes|An array of SSL pins, where each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info. Note that [at least two pins are needed per domain on iOS](#additional-notes).|
+|`expirationDate`|`string`|No|A string containing the date, in yyyy-MM-dd format, on which the domain’s configured SSL pins expire, thus disabling pinning validation. If this is not set, then the pins do not expire. Expiration helps prevent connectivity issues in Apps which do not get updates to their pin set, such as when the user disables App updates.|
 
 ## 📝Additional Notes
 
