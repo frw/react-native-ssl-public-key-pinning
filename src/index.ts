@@ -4,18 +4,9 @@ import {
   NativeEventEmitter,
   type EmitterSubscription,
 } from 'react-native';
-import {
-  PINNING_ERROR_EVENT_NAME,
-  type ErrorListenerCallback,
-  type PinningOptions,
-} from './NativeSslPublicKeyPinning';
 
-export type {
-  DomainOptions,
-  PinningOptions,
-  PinningError,
-  ErrorListenerCallback,
-} from './NativeSslPublicKeyPinning';
+import type { ErrorListenerCallback, PinningOptions } from './types';
+export type * from './types';
 
 const LINKING_ERROR =
   `The package 'react-native-ssl-public-key-pinning' doesn't seem to be linked. Make sure: \n\n` +
@@ -41,13 +32,15 @@ const SslPublicKeyPinning = SslPublicKeyPinningModule
       }
     );
 
+const PINNING_ERROR_EVENT_NAME = 'pinning-error';
+
 /**
  * Checks whether the SslPublicKeyPinning NativeModule is available on the current app installation.
  * Useful if you're using Expo Go and want to avoid initializing pinning if it's not available.
  * @returns true if SslPublicKeyPinning is available
  */
 export function isSslPinningAvailable(): boolean {
-  return NativeModules.SslPublicKeyPinning != null;
+  return SslPublicKeyPinningModule != null;
 }
 
 /**
