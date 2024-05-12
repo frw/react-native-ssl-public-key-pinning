@@ -13,6 +13,7 @@ static NSString *kExpirationDate = @"expirationDate";
 
 static NSString *PinningErrorEventName = @"pinning-error";
 static NSString *kServerHostname = @"serverHostname";
+static NSString *kMessage = @"message";
 
 static TrustKit *trustKitInstance = nil;
 
@@ -33,9 +34,10 @@ RCT_EXPORT_MODULE()
     hasListeners = NO;
 }
 
-- (void) emitPinningErrorEvent:(NSString *)serverHostname {
-    [self sendEventWithName:PinningErrorEventName body:@{ kServerHostname: serverHostname }];
+- (void)emitPinningErrorEvent:(NSString *)serverHostname message:(NSString *)message {
+    [self sendEventWithName:PinningErrorEventName body:@{ kServerHostname: serverHostname, kMessage: message }];
 }
+
 
 - (void) initializeTrustKit:(NSDictionary *)options {
     NSMutableDictionary *pinnedDomains = [NSMutableDictionary dictionary];
@@ -59,13 +61,55 @@ RCT_EXPORT_MODULE()
     }
     
     trustKitInstance = [[TrustKit alloc] initWithConfiguration:@{ kTSKPinnedDomains: pinnedDomains }];
-    trustKitInstance.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy * _Nonnull policy) {
-        if (!self->hasListeners || result.evaluationResult != TSKTrustEvaluationFailedNoMatchingPin) {
+    trustKitInstance.pinningValidatorCallback = ^(TSKPinningValidatorResult *result, NSString *notedHostname, TKSDomainPinningPolicy *policy) {
+      if (!self->hasListeners || result.evaluationResult != TSKTrustEvaluationFailedNoMatchingPin) {
             return;
         }
-        [self emitPinningErrorEvent:result.serverHostname];
+      switch (result.evaluationResult) {
+          /** el cetrificate validation succesfully   */
+        case TSKTrustEvaluationSuccess:
+          NSLog(@"TrustKit certificate validation successful evaluated and contained at least one of the configured pins for hostname: %@", notedHostname);
+        //   [self emitPinningErrorEvent:notedHostname message@"TrustKit certificate validation successful"];
+          break;
+          
+          /** lw mfe4 wala pin bt3ml match m3 el certificate **/
+        case TSKTrustEvaluationFailedNoMatchingPin:
+          NSLog(@"The server trust was succesfully evaluated but did not contain any of the configured pins for hostname: %@", notedHostname);
+           [self emitPinningErrorEvent:notedHostname message:@"The server trust was succesfully evaluated but did not contain any of the configured pins for hostname"];
+          // Add more logging or exception handling here. i.e. Sentry, BugSnag etc
+          break;
+          
+          /**
+           To simulate the TSKTrustEvaluationFailedInvalidCertificateChain error in TrustKit, you can use a testing server with an invalid certificate chain. One way to achieve this is by creating a self-signed certificate and not adding its root certificate to the device's trust store.
+           */
+        case TSKTrustEvaluationFailedInvalidCertificateChain:
+          NSLog(@"The server trust's evaluation failed: the server's certificate chain is not trusted for hostname: %@", notedHostname);
+          [self emitPinningErrorEvent:notedHostname message:@"The server trust's evaluation failed: the server's certificate chain is not trusted for hostname"];
+          // Add more logging or exception handling here. i.e. Sentry, BugSnag etc
+          break;
+          
+          
+        case TSKTrustEvaluationErrorInvalidParameters:
+          NSLog(@"The server trust could not be evaluated due to invalid parameters: %@", notedHostname);
+          [self emitPinningErrorEvent:notedHostname message:@"The server trust could not be evaluated due to invalid parameters"];
+          // Add more logging or exception handling here. i.e. Sentry, BugSnag etc
+          break;
+          
+        case TSKTrustEvaluationErrorCouldNotGenerateSpkiHash:
+          NSLog(@"The server trust could not be evaluated due to an error when trying to generate the certificate's subject public key info hash.On iOS 9 or below, this could be caused by a Keychain failure when trying to extract the certificate's public key bytes for hostname: %@", notedHostname);
+          [self emitPinningErrorEvent:notedHostname message:@"The server trust could not be evaluated due to an error when trying to generate the certificate's subject public key info hash"];
+          // Add more logging or exception handling here. i.e. Sentry, BugSnag etc
+          break;
+          
+        default:
+          NSLog(@"TrustKit certificate validation result unknown for hostname: %@", notedHostname);
+           [self emitPinningErrorEvent:notedHostname message:@"TrustKit certificate validation result unknown for hostname:"];
+          // Add more logging or exception handling here. i.e. Sentry, BugSnag etc
+          break;
+      }
     };
-}
+  }
+
 
 RCT_EXPORT_METHOD(initialize:(NSDictionary *)options
                   resolve:(RCTPromiseResolveBlock)resolve
