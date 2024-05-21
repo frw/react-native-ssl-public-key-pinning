@@ -24,11 +24,17 @@ jobs:
         run: yarn typecheck
 
   test-e2e-android:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -63,13 +69,13 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-31-${{ steps.device.outputs.AVD_NAME }}
+          key: avd-34-x86_64-${{ steps.device.outputs.AVD_NAME }}
 
       - name: Create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 31
+          api-level: 34
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           force-avd-creation: false
@@ -80,7 +86,7 @@ jobs:
       - name: Run Detox Test(s)
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 31
+          api-level: 34
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           force-avd-creation: false
