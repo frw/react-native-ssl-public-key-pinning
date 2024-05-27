@@ -5864,8 +5864,8 @@ __metadata:
   linkType: hard
 
 "detox@npm:^20.19.4":
-  version: 20.20.3
-  resolution: "detox@npm:20.20.3"
+  version: 20.22.2
+  resolution: "detox@npm:20.22.2"
   dependencies:
     ajv: ^8.6.3
     bunyan: ^1.8.12
@@ -5879,7 +5879,7 @@ __metadata:
     funpermaproxy: ^1.1.0
     glob: ^8.0.3
     ini: ^1.3.4
-    jest-environment-emit: ^1.0.5
+    jest-environment-emit: ^1.0.8
     json-cycle: ^1.3.0
     lodash: ^4.17.11
     multi-sort-stream: ^1.0.3
@@ -5909,7 +5909,7 @@ __metadata:
       optional: true
   bin:
     detox: local-cli/cli.js
-  checksum: 35da9c4497e34ee115d9df9f43e16c01ebec49deec8d749305118c242d1f5e4c59d3a9d7942cfe1c7f86be0a0e9e16a37d7908439196f99c324147600b9efcf8
+  checksum: d9a84bdad582d524e259a9719bfdc7f45ce01035af03b826d850377783ec8553d6407080d7ffcf68fd354f80fcff4788fc13ce80bf0d3af66aeab6268540ee9a
   languageName: node
   linkType: hard
 
@@ -8819,9 +8819,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-environment-emit@npm:^1.0.5":
-  version: 1.0.7
-  resolution: "jest-environment-emit@npm:1.0.7"
+"jest-environment-emit@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "jest-environment-emit@npm:1.0.8"
   dependencies:
     bunyamin: ^1.5.2
     bunyan: ^2.0.5
@@ -8848,7 +8848,7 @@ __metadata:
       optional: true
     jest-environment-node:
       optional: true
-  checksum: 6620dacd5ff43e93c20d51c91acc8b7c9219f26ccce95adbdfe2bf21ffe0544c3a98905b97a4aa8a5609c863861a074ea10efcd6c8df8d9c4ed50b7fbb627aad
+  checksum: 0c7bafbd3a6e5952f6abb45958f0d2997371d29b29f3876afda48d1d734ccd703577aaac0d5afec2e19dc33a9db0e9458721fe73dbe797f0ced21481d908acfd
   languageName: node
   linkType: hard
 
