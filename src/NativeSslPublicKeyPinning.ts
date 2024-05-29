@@ -1,7 +1,7 @@
 import { TurboModuleRegistry, type TurboModule } from 'react-native';
 
 export interface Spec extends TurboModule {
-  initialize(options: {}): Promise<void>;
+  initialize(options: {[key: string]: {}}): Promise<void>;
   disable(): Promise<void>;
 
   addListener: (eventType: string) => void;
