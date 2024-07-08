@@ -2471,11 +2471,11 @@ __metadata:
   linkType: hard
 
 "@evilmartians/lefthook@npm:^1.2.2":
-  version: 1.6.7
-  resolution: "@evilmartians/lefthook@npm:1.6.7"
+  version: 1.7.1
+  resolution: "@evilmartians/lefthook@npm:1.7.1"
   bin:
     lefthook: bin/index.js
-  checksum: 43e422d092d54958060e64519c1dc354f58cfc788066cb746d1ad9bcb8970099912737b5a53edcaa703a724e01de72ad0b3ce9742fc2cd76d492f61639ad2318
+  checksum: ebf745d4528d9f2fdab7044b63dc0f1f265397a9b345275977119186de438fc17fa5b55025b7200c8207a3f3b88b5754c7d38123a1e73320352bb28f68cef65e
   conditions: (os=darwin | os=linux | os=win32) & (cpu=x64 | cpu=arm64 | cpu=ia32)
   languageName: node
   linkType: hard
