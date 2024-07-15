@@ -3355,12 +3355,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/babel-plugin-codegen@npm:0.74.84":
-  version: 0.74.84
-  resolution: "@react-native/babel-plugin-codegen@npm:0.74.84"
+"@react-native/babel-plugin-codegen@npm:0.74.85":
+  version: 0.74.85
+  resolution: "@react-native/babel-plugin-codegen@npm:0.74.85"
   dependencies:
-    "@react-native/codegen": 0.74.84
-  checksum: b2ada55a80546162fee02129f4e7610a8a24780531ea67d198dbbb64d5c6ae29044a7af542a3f41d390296ef988d53d0304d5f6d17ab03c493d3f0ab440efa11
+    "@react-native/codegen": 0.74.85
+  checksum: d2bf5d94cc985405590cf80c95dafa20e7223edaa873709d2da72798b09d6fe0570941ef34656587691c5e52d0f4273dcb114450ebcc53f380f54ac68685c7e8
   languageName: node
   linkType: hard
 
@@ -3469,9 +3469,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/babel-preset@npm:0.74.84":
-  version: 0.74.84
-  resolution: "@react-native/babel-preset@npm:0.74.84"
+"@react-native/babel-preset@npm:0.74.85":
+  version: 0.74.85
+  resolution: "@react-native/babel-preset@npm:0.74.85"
   dependencies:
     "@babel/core": ^7.20.0
     "@babel/plugin-proposal-async-generator-functions": ^7.0.0
@@ -3513,12 +3513,12 @@ __metadata:
     "@babel/plugin-transform-typescript": ^7.5.0
     "@babel/plugin-transform-unicode-regex": ^7.0.0
     "@babel/template": ^7.0.0
-    "@react-native/babel-plugin-codegen": 0.74.84
+    "@react-native/babel-plugin-codegen": 0.74.85
     babel-plugin-transform-flow-enums: ^0.0.2
     react-refresh: ^0.14.0
   peerDependencies:
     "@babel/core": "*"
-  checksum: 5cdc7a56b165e1a03c8cc24bf5d8fd32bf987cd889aa958a82aa828e5fdb651d517a033b16be33f4fa26b9b685dfb805df644bdccc8067fb9fca2bfa82a417b6
+  checksum: b260bc8810e6617f3d4834e6bd44e181ebced0f57b5e88673fee21eefa8f1a02ff8fe4c670dacbdfb37e540a6178eb10c8fd51aa62c20a6148a816c31956cc6b
   languageName: node
   linkType: hard
 
@@ -3556,9 +3556,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/codegen@npm:0.74.84":
-  version: 0.74.84
-  resolution: "@react-native/codegen@npm:0.74.84"
+"@react-native/codegen@npm:0.74.85":
+  version: 0.74.85
+  resolution: "@react-native/codegen@npm:0.74.85"
   dependencies:
     "@babel/parser": ^7.20.0
     glob: ^7.1.1
@@ -3569,7 +3569,7 @@ __metadata:
     nullthrows: ^1.1.1
   peerDependencies:
     "@babel/preset-env": ^7.1.6
-  checksum: d44d2e2d833dd92012cb947e7d815f47892b7b612eed99a19fbf3a3c0cdebbcc72ef9eef3dd538f7603910275344b0a0bdfcf9864a0a913a5b6401b382d07166
+  checksum: fb3e065774e5ad97c6af269407b543f286ea0d32d5ce62d3955e02c5514190700212aeb6aab0a3364636080d07643076f1caf771d4dfd594da5782fc2e7b87ae
   languageName: node
   linkType: hard
 
@@ -11913,7 +11913,7 @@ __metadata:
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
-    "@react-native/babel-preset": 0.74.84
+    "@react-native/babel-preset": 0.74.85
     "@react-native/metro-config": 0.74.83
     "@react-native/typescript-config": 0.74.84
     "@types/node": ^20.12.12
