@@ -3952,13 +3952,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/parse-json@npm:^4.0.0":
-  version: 4.0.2
-  resolution: "@types/parse-json@npm:4.0.2"
-  checksum: 5bf62eec37c332ad10059252fc0dab7e7da730764869c980b0714777ad3d065e490627be9f40fc52f238ffa3ac4199b19de4127196910576c2fe34dd47c7a470
-  languageName: node
-  linkType: hard
-
 "@types/prop-types@npm:*":
   version: 15.7.12
   resolution: "@types/prop-types@npm:15.7.12"
@@ -5773,19 +5766,6 @@ __metadata:
     js-yaml: ^3.13.1
     parse-json: ^4.0.0
   checksum: 8b6f1d3c8a5ffdf663a952f17af0761adf210b7a5933d0fe8988f3ca3a1f0e1e5cbbb74d5b419c15933dd2fdcaec31dbc5cc85cb8259a822342b93b529eff89c
-  languageName: node
-  linkType: hard
-
-"cosmiconfig@npm:^7.0.1":
-  version: 7.1.0
-  resolution: "cosmiconfig@npm:7.1.0"
-  dependencies:
-    "@types/parse-json": ^4.0.0
-    import-fresh: ^3.2.1
-    parse-json: ^5.0.0
-    path-type: ^4.0.0
-    yaml: ^1.10.0
-  checksum: c53bf7befc1591b2651a22414a5e786cd5f2eeaa87f3678a3d49d6069835a9d8d1aef223728e98aa8fec9a95bf831120d245096db12abe019fecb51f5696c96f
   languageName: node
   linkType: hard
 
@@ -11234,7 +11214,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-json@npm:^5.0.0, parse-json@npm:^5.2.0":
+"parse-json@npm:^5.2.0":
   version: 5.2.0
   resolution: "parse-json@npm:5.2.0"
   dependencies:
@@ -11724,9 +11704,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-builder-bob@npm:^0.25.0":
-  version: 0.25.0
-  resolution: "react-native-builder-bob@npm:0.25.0"
+"react-native-builder-bob@npm:^0.26.0":
+  version: 0.26.0
+  resolution: "react-native-builder-bob@npm:0.26.0"
   dependencies:
     "@babel/core": ^7.18.5
     "@babel/plugin-proposal-class-properties": ^7.17.12
@@ -11735,7 +11715,7 @@ __metadata:
     "@babel/preset-react": ^7.17.12
     "@babel/preset-typescript": ^7.17.12
     browserslist: ^4.20.4
-    cosmiconfig: ^7.0.1
+    cosmiconfig: ^9.0.0
     cross-spawn: ^7.0.3
     dedent: ^0.7.0
     del: ^6.1.1
@@ -11749,7 +11729,7 @@ __metadata:
     yargs: ^17.5.1
   bin:
     bob: bin/bob
-  checksum: b2e2fc616937e5a2d891cdaf32add170213ccbd0c16527894796701a018f5670dc82724723e78e6a10d0f78e0c36f60e0ae2234f4548275ac5c6df7c58aa7a69
+  checksum: 60b720ce74b5571ec293a10d00b26dc923d62a0c07222548499b90878e72be3ddd77fb33b62144ab0a0f405049a3747376742b9499cb73f9e851da0ce0e17204
   languageName: node
   linkType: hard
 
@@ -11801,7 +11781,7 @@ __metadata:
     prettier: ^3.1.0
     react: 18.3.1
     react-native: 0.74.3
-    react-native-builder-bob: ^0.25.0
+    react-native-builder-bob: ^0.26.0
     release-it: ^17.0.0
     ts-node: ^10.9.1
     typescript: ^5.3.2
@@ -14165,13 +14145,6 @@ __metadata:
   version: 4.0.0
   resolution: "yallist@npm:4.0.0"
   checksum: 343617202af32df2a15a3be36a5a8c0c8545208f3d3dfbc6bb7c3e3b7e8c6f8e7485432e4f3b88da3031a6e20afa7c711eded32ddfb122896ac5d914e75848d5
-  languageName: node
-  linkType: hard
-
-"yaml@npm:^1.10.0":
-  version: 1.10.2
-  resolution: "yaml@npm:1.10.2"
-  checksum: ce4ada136e8a78a0b08dc10b4b900936912d15de59905b2bf415b4d33c63df1d555d23acb2a41b23cf9fb5da41c256441afca3d6509de7247daa062fd2c5ea5f
   languageName: node
   linkType: hard
 
