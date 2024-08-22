@@ -4232,10 +4232,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/typescript-config@npm:0.74.87":
-  version: 0.74.87
-  resolution: "@react-native/typescript-config@npm:0.74.87"
-  checksum: 83fd49216d09d1814d58fa093d59bf86fd1f95184b5dc7db9ed505954ca4d96f80ec90a9ff2b5f1ccc2a6b263ead9540a60206c25622f05a4fa93054795eedd9
+"@react-native/typescript-config@npm:0.75.1":
+  version: 0.75.1
+  resolution: "@react-native/typescript-config@npm:0.75.1"
+  checksum: 831025b476fece79a91e6f6ada4bfbc8c7de3f32149c1c9d64b1bc2ad43bb5ebe1eaf738fb53761cd648d1a546a52fa552b0836e20868ed12c41ace8c10daa4c
   languageName: node
   linkType: hard
 
@@ -12570,7 +12570,7 @@ __metadata:
     "@babel/runtime": ^7.20.0
     "@react-native/babel-preset": 0.74.85
     "@react-native/metro-config": 0.74.87
-    "@react-native/typescript-config": 0.74.87
+    "@react-native/typescript-config": 0.75.1
     "@types/node": ^22.1.0
     "@types/react": ^18.2.6
     "@types/react-test-renderer": ^18.0.0
