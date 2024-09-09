@@ -2626,12 +2626,12 @@ __metadata:
   linkType: hard
 
 "@commitlint/config-conventional@npm:^19.1.0":
-  version: 19.2.2
-  resolution: "@commitlint/config-conventional@npm:19.2.2"
+  version: 19.4.1
+  resolution: "@commitlint/config-conventional@npm:19.4.1"
   dependencies:
     "@commitlint/types": ^19.0.3
     conventional-changelog-conventionalcommits: ^7.0.2
-  checksum: fa6b5f763ff1e6c118e4d8434db81058a88afb622a76e6df13956d6b14b9462fd02b81160db5325895165ef0dd18641f6d762a2f1858f0b4fc70fae9720b5b15
+  checksum: f672b8ad332ab8cc8ebefbaac1b8f8164864b969745f701982ed526a153127a507d9feb38722e15ba8eae1ad959b1ae29fe615e51f695d8120b5c455883653a3
   languageName: node
   linkType: hard
 
