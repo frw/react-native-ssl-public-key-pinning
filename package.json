@@ -121,7 +121,8 @@
       "prettier"
     ],
     "plugins": [
-      "detox"
+      "detox",
+      "prettier"
     ],
     "rules": {
       "prettier/prettier": [
