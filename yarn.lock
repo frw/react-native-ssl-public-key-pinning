@@ -10887,15 +10887,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-builder-bob@npm:^0.29.0":
-  version: 0.29.0
-  resolution: "react-native-builder-bob@npm:0.29.0"
+"react-native-builder-bob@npm:^0.30.2":
+  version: 0.30.2
+  resolution: "react-native-builder-bob@npm:0.30.2"
   dependencies:
     "@babel/core": ^7.25.2
-    "@babel/plugin-transform-class-properties": ^7.24.7
-    "@babel/plugin-transform-classes": ^7.25.0
-    "@babel/plugin-transform-private-methods": ^7.24.7
-    "@babel/plugin-transform-private-property-in-object": ^7.24.7
     "@babel/plugin-transform-strict-mode": ^7.24.7
     "@babel/preset-env": ^7.25.2
     "@babel/preset-flow": ^7.24.7
@@ -10919,7 +10915,7 @@ __metadata:
     yargs: ^17.5.1
   bin:
     bob: bin/bob
-  checksum: 2af3139966a37ae07346e3e29a225e0df2a6e5421972288a83d770ec62d91643e32871e7b2b4cb12c59ac21d90c7b580f8ce3bc5bf9785c59960e03613cf1a4d
+  checksum: 880ba5c9cf45f20dc5d7423a82b6963bb61d3fa41096b1d7ac2c7a141dfaedd5386ae6d29f80861922911220b8d0d689c831e01d9c8aca06afbb53933fa0f8b5
   languageName: node
   linkType: hard
 
@@ -10971,7 +10967,7 @@ __metadata:
     prettier: ^3.1.0
     react: 18.3.1
     react-native: 0.75.3
-    react-native-builder-bob: ^0.29.0
+    react-native-builder-bob: ^0.30.2
     release-it: ^17.0.0
     ts-node: ^10.9.1
     typescript: ^5.3.2
