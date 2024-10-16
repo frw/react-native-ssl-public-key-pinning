@@ -5385,9 +5385,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"detox-copilot@npm:^0.0.14":
+  version: 0.0.14
+  resolution: "detox-copilot@npm:0.0.14"
+  checksum: 79b81f61d98ee1dd586823e3f6f93c186127f83298d85492e02b397f31cb9d96e76ee8073bd02a09b04e7f6e1b8bf08ffbd6819da06665c56ecd625efb31505b
+  languageName: node
+  linkType: hard
+
 "detox@npm:^20.19.4":
-  version: 20.25.1
-  resolution: "detox@npm:20.25.1"
+  version: 20.27.3
+  resolution: "detox@npm:20.27.3"
   dependencies:
     ajv: ^8.6.3
     bunyan: ^1.8.12
@@ -5395,6 +5402,7 @@ __metadata:
     caf: ^15.0.1
     chalk: ^4.0.0
     child-process-promise: ^2.2.0
+    detox-copilot: ^0.0.14
     execa: ^5.1.1
     find-up: ^5.0.0
     fs-extra: ^11.0.0
@@ -5431,7 +5439,7 @@ __metadata:
       optional: true
   bin:
     detox: local-cli/cli.js
-  checksum: f2ec57c111f75dbcdc8128fcba1365fb43ce5a26b9969c57a4b43314277993f6ddbc99780b234824afb8e70521c776f9e696d8b96a8a6ca49d940110f71f809c
+  checksum: fc37750edfbaac59a8d892a9b055a2941e84e2c7d082910f7336feaf139cc528cc6e62a6874b1ab8ab9192e5430a66231d809b5deff8dcae711f6cea8e4d37a6
   languageName: node
   linkType: hard
 
