@@ -107,6 +107,9 @@ export default function App() {
   }, [testDomain]);
 
   React.useEffect(() => {
+    if (!isSslPinningAvailable()) {
+      return;
+    }
     const subscription = addSslPinningErrorListener((error) => {
       setPinningError(`Pinning Error: ${error.serverHostname}`);
     });
