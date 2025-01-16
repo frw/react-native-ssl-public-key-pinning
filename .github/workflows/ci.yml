@@ -95,10 +95,10 @@ jobs:
           script: yarn example detox test e2e --configuration android.emu.release --headless --record-logs all --take-screenshots failing
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: detox-artifacts
+          name: detox-artifacts-android
           path: example/artifacts
 
   test-e2e-ios:
@@ -145,10 +145,10 @@ jobs:
         run: yarn example detox test e2e --configuration ios.sim.release --cleanup --headless --record-logs all --take-screenshots failing
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: detox-artifacts
+          name: detox-artifacts-ios
           path: example/artifacts
 
   build-library:
