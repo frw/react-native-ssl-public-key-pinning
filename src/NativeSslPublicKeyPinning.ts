@@ -8,6 +8,4 @@ export interface Spec extends TurboModule {
   removeListeners: (count: number) => void;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>(
-  'SslPublicKeyPinning'
-) as Spec | null;
+export default TurboModuleRegistry.get<Spec>('SslPublicKeyPinning');
