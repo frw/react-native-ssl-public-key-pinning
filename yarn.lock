@@ -10859,9 +10859,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-builder-bob@npm:^0.30.2":
-  version: 0.30.3
-  resolution: "react-native-builder-bob@npm:0.30.3"
+"react-native-builder-bob@npm:^0.36.0":
+  version: 0.36.0
+  resolution: "react-native-builder-bob@npm:0.36.0"
   dependencies:
     "@babel/core": ^7.25.2
     "@babel/plugin-transform-strict-mode": ^7.24.7
@@ -10887,7 +10887,7 @@ __metadata:
     yargs: ^17.5.1
   bin:
     bob: bin/bob
-  checksum: 32b2159559a08310656b6b2f5f591a6aeeb9595f0f2d0e8dff7602af6aa62f59ae7206b023789de0a08f231d747c9bcab19e3efc874fad124b38e40c61f1ec90
+  checksum: 2d47c039e3d6f90cd6a074cbe35c2dfc96868a73a6aee503fb981aace1c1ec2830517ce4910f5e368a558ed2f10302f60361cb1bf37ef341a913d125020bd2ee
   languageName: node
   linkType: hard
 
@@ -10939,7 +10939,7 @@ __metadata:
     prettier: ^3.1.0
     react: 18.3.1
     react-native: 0.75.3
-    react-native-builder-bob: ^0.30.2
+    react-native-builder-bob: ^0.36.0
     release-it: ^18.1.1
     ts-node: ^10.9.1
     typescript: ^5.3.2
