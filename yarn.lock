@@ -3555,12 +3555,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-test-renderer@npm:^18.0.0":
-  version: 18.3.0
-  resolution: "@types/react-test-renderer@npm:18.3.0"
+"@types/react-test-renderer@npm:^19.1.0":
+  version: 19.1.0
+  resolution: "@types/react-test-renderer@npm:19.1.0"
   dependencies:
     "@types/react": "*"
-  checksum: c53683990bd194cb68e3987bda79c78eff41517f7a747e92f3e54217c2ce3addd031b8a45bf631982c909cc2caeeb905372f322758e05bb76c03754a3f24426e
+  checksum: 2ef3aec0f2fd638902cda606d70c8531d66f8e8944334427986b99dcac9755ee60b700c5c3a19ac354680f9c45669e98077b84f79cac60e950bdb7d38aebffde
   languageName: node
   linkType: hard
 
@@ -11107,7 +11107,7 @@ __metadata:
     "@react-native/typescript-config": 0.76.0
     "@types/node": ^22.1.0
     "@types/react": ^18.2.6
-    "@types/react-test-renderer": ^18.0.0
+    "@types/react-test-renderer": ^19.1.0
     babel-jest: ^29.7.0
     babel-plugin-module-resolver: ^5.0.0
     detox: ^20.19.4

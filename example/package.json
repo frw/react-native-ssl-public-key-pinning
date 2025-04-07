@@ -23,7 +23,7 @@
     "@react-native/typescript-config": "0.76.0",
     "@types/node": "^22.1.0",
     "@types/react": "^18.2.6",
-    "@types/react-test-renderer": "^18.0.0",
+    "@types/react-test-renderer": "^19.1.0",
     "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.0",
     "detox": "^20.19.4",
