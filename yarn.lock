@@ -10690,12 +10690,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pod-install@npm:^0.2.0":
-  version: 0.2.2
-  resolution: "pod-install@npm:0.2.2"
+"pod-install@npm:^0.3.9":
+  version: 0.3.9
+  resolution: "pod-install@npm:0.3.9"
   bin:
     pod-install: build/index.js
-  checksum: 10/0f72124a16cae8fc201ef5160394a0c99b9ddd19828f21fb00988f6761095ff95005e481e56acbd4013ec929dbc1f2af491488c4ff917f5ae930560f09e0fed4
+  checksum: 10/327b579e53f08984a93170a876d3ea0c2918ba80ac7187cf51a64d430fdffc0d151b80c940740489c28a9a5b9b7e96b840e8a81e60e4aa44cad0b9ced090dda8
   languageName: node
   linkType: hard
 
@@ -11045,7 +11045,7 @@ __metadata:
     "@types/react-test-renderer": "npm:^19.0.0"
     detox: "npm:^20.37.0"
     jest: "npm:^29.7.0"
-    pod-install: "npm:^0.2.0"
+    pod-install: "npm:^0.3.9"
     react: "npm:19.0.0"
     react-native: "npm:0.79.1"
     ts-node: "npm:^10.9.2"
@@ -11072,7 +11072,7 @@ __metadata:
     eslint-plugin-detox: "npm:^1.0.0"
     eslint-plugin-prettier: "npm:^5.0.1"
     jest: "npm:^29.7.0"
-    pod-install: "npm:^0.2.0"
+    pod-install: "npm:^0.3.9"
     prettier: "npm:^3.1.0"
     react: "npm:18.3.1"
     react-native: "npm:0.79.1"
