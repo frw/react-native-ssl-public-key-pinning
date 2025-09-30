@@ -53,7 +53,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^19.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@evilmartians/lefthook": "^1.2.2",
     "@react-native/babel-preset": "0.79.1",
     "@react-native/eslint-config": "0.79.2",
