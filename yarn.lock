@@ -3402,13 +3402,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*":
-  version: 15.7.12
-  resolution: "@types/prop-types@npm:15.7.12"
-  checksum: 10/ac16cc3d0a84431ffa5cfdf89579ad1e2269549f32ce0c769321fdd078f84db4fbe1b461ed5a1a496caf09e637c0e367d600c541435716a55b1d9713f5035dfe
-  languageName: node
-  linkType: hard
-
 "@types/react-test-renderer@npm:^19.0.0":
   version: 19.1.0
   resolution: "@types/react-test-renderer@npm:19.1.0"
@@ -3427,13 +3420,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:~18.3.1":
-  version: 18.3.11
-  resolution: "@types/react@npm:18.3.11"
+"@types/react@npm:~19.2.5":
+  version: 19.2.5
+  resolution: "@types/react@npm:19.2.5"
   dependencies:
-    "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10/a36f0707fdfe9fe19cbe5892bcdab0f042ecadb501ea4e1c39519943f3e74cffbd31e892d3860f5c87cf33f5f223552b246a552bed0087b95954f2cb39d5cf65
+  checksum: 10/31067648e1380f6ddade8f586c7ff54db89c1b11e23cb307fb69e5bfceae22105721568e2eec15be2af03e63bf5fb6da4284b8621447d20ade7b7afab043b945
   languageName: node
   linkType: hard
 
@@ -9096,7 +9088,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.0.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -11101,7 +11093,7 @@ __metadata:
     detox: "npm:^20.37.0"
     jest: "npm:^29.7.0"
     pod-install: "npm:^1.0.7"
-    react: "npm:19.0.0"
+    react: "npm:19.2.0"
     react-native: "npm:0.79.1"
     ts-node: "npm:^10.9.2"
     typescript: "npm:~5.5.4"
@@ -11119,7 +11111,7 @@ __metadata:
     "@release-it/conventional-changelog": "npm:^10.0.0"
     "@types/jest": "npm:^29.5.10"
     "@types/node": "npm:^24.0.3"
-    "@types/react": "npm:~18.3.1"
+    "@types/react": "npm:~19.2.5"
     commitlint: "npm:^20.1.0"
     del-cli: "npm:^6.0.0"
     eslint: "npm:^8.55.0"
@@ -11129,7 +11121,7 @@ __metadata:
     jest: "npm:^29.7.0"
     pod-install: "npm:^1.0.7"
     prettier: "npm:^3.1.0"
-    react: "npm:18.3.1"
+    react: "npm:19.2.0"
     react-native: "npm:0.79.1"
     react-native-builder-bob: "npm:^0.36.0"
     release-it: "npm:^19.0.5"
@@ -11200,19 +11192,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.3.1":
-  version: 18.3.1
-  resolution: "react@npm:18.3.1"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-  checksum: 10/261137d3f3993eaa2368a83110466fc0e558bc2c7f7ae7ca52d94f03aac945f45146bd85e5f481044db1758a1dbb57879e2fcdd33924e2dde1bdc550ce73f7bf
-  languageName: node
-  linkType: hard
-
-"react@npm:19.0.0":
-  version: 19.0.0
-  resolution: "react@npm:19.0.0"
-  checksum: 10/2490969c503f644703c88990d20e4011fa6119ddeca451e9de48f6d7ab058d670d2852a5fcd3aa3cd90a923ab2815d532637bd4a814add402ae5c0d4f129ee71
+"react@npm:19.2.0":
+  version: 19.2.0
+  resolution: "react@npm:19.2.0"
+  checksum: 10/e13bcdb8e994c3cfa922743cb75ca8deb60531bf02f584d2d8dab940a8132ce8a2e6ef16f8ed7f372b4072e7a7eeff589b2812dabbedfa73e6e46201dac8a9d0
   languageName: node
   linkType: hard
 
